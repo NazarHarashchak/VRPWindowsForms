@@ -1,0 +1,180 @@
+{
+  "geocoded_waypoints": [
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJNcqvJwjdOkcR_qWrXuP88gI",
+      "types": [ "street_address" ]
+    },
+    {
+      "geocoder_status": "OK",
+      "place_id": "ChIJe3EPJPncOkcRsivcETVShyQ",
+      "types": [ "premise" ]
+    }
+  ],
+  "routes": [
+    {
+      "bounds": {
+        "northeast": {
+          "lat": 49.8710304,
+          "lng": 24.0443787
+        },
+        "southwest": {
+          "lat": 49.8556614,
+          "lng": 24.0225697
+        }
+      },
+      "copyrights": "Map data ©2021 Google",
+      "legs": [
+        {
+          "distance": {
+            "text": "2,7 км",
+            "value": 2748
+          },
+          "duration": {
+            "text": "7 мин.",
+            "value": 443
+          },
+          "end_address": "вулиця Івана Миколайчука, 7, Львів, Львівська область, Украина, 79000",
+          "end_location": {
+            "lat": 49.8710304,
+            "lng": 24.0426501
+          },
+          "start_address": "вулиця Ставова, 7, Львів, Львівська область, Украина, 79000",
+          "start_location": {
+            "lat": 49.8556719,
+            "lng": 24.023031
+          },
+          "steps": [
+            {
+              "distance": {
+                "text": "41 м",
+                "value": 41
+              },
+              "duration": {
+                "text": "1 мин.",
+                "value": 49
+              },
+              "end_location": {
+                "lat": 49.8557453,
+                "lng": 24.0225697
+              },
+              "html_instructions": "Направляйтесь на \u003cb\u003eсеверо-запад\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eДорога с частично ограниченным движением\u003c/div\u003e",
+              "polyline": {
+                "points": "}lhoH}~rqCA@A@A@AB?D?D@JF`@?@EFEDEF"
+              },
+              "start_location": {
+                "lat": 49.8556719,
+                "lng": 24.023031
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,1 км",
+                "value": 134
+              },
+              "duration": {
+                "text": "1 мин.",
+                "value": 51
+              },
+              "end_location": {
+                "lat": 49.8568959,
+                "lng": 24.0231016
+              },
+              "html_instructions": "Поверните \u003cb\u003eнаправо\u003c/b\u003e в сторону \u003cb\u003eвул. Могильницького\u003c/b\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "mmhoHa|rqCGC}@[_DiA"
+              },
+              "start_location": {
+                "lat": 49.8557453,
+                "lng": 24.0225697
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "57 м",
+                "value": 57
+              },
+              "duration": {
+                "text": "1 мин.",
+                "value": 17
+              },
+              "end_location": {
+                "lat": 49.8573317,
+                "lng": 24.0228421
+              },
+              "html_instructions": "Продолжайте движение по \u003cb\u003eвул. Могильницького\u003c/b\u003e",
+              "polyline": {
+                "points": "sthoHk_sqCOGGCC?C?C@A?EDY`@OT"
+              },
+              "start_location": {
+                "lat": 49.8568959,
+                "lng": 24.0231016
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "1,9 км",
+                "value": 1857
+              },
+              "duration": {
+                "text": "4 мин.",
+                "value": 210
+              },
+              "end_location": {
+                "lat": 49.8652137,
+                "lng": 24.0443787
+              },
+              "html_instructions": "Поверните \u003cb\u003eнаправо\u003c/b\u003e на \u003cb\u003eвул. Липинського\u003c/b\u003e/\u003cwbr/\u003e\u003cb\u003eМ06\u003c/b\u003e",
+              "maneuver": "turn-right",
+              "polyline": {
+                "points": "iwhoHw}rqCiAiC}@_BaAaB_AwAcCqDg@{@}AoBS[oAiBw@{@}@aAuAyAg@k@_@e@OUEIiAyCEI}AyGq@oCsAcGEM_AyDQw@Q}@Gk@E]C[QoBk@eIGw@IiAKaBc@qHI}AKgBYmFYwFIyBAY"
+              },
+              "start_location": {
+                "lat": 49.8573317,
+                "lng": 24.0228421
+              },
+              "travel_mode": "DRIVING"
+            },
+            {
+              "distance": {
+                "text": "0,7 км",
+                "value": 659
+              },
+              "duration": {
+                "text": "2 мин.",
+                "value": 116
+              },
+              "end_location": {
+                "lat": 49.8710304,
+                "lng": 24.0426501
+              },
+              "html_instructions": "Поверните \u003cb\u003eналево\u003c/b\u003e на \u003cb\u003eвул. Івана Миколайчука\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eПункт назначения будет слева\u003c/div\u003e",
+              "maneuver": "turn-left",
+              "polyline": {
+                "points": "qhjoHkdwqCkC\\I@QBuANc@FOBUBiB`@kAXQDoA\\oBb@eAVu@PMB_Ch@KBaCh@c@J"
+              },
+              "start_location": {
+                "lat": 49.8652137,
+                "lng": 24.0443787
+              },
+              "travel_mode": "DRIVING"
+            }
+          ],
+          "traffic_speed_entry": [],
+          "via_waypoint": []
+        }
+      ],
+      "overview_polyline": {
+        "points": "}lhoH}~rqCGH?JHl@QVeFiB_@KE@_@f@OTiAiC_CaEcEiGg@{@}AoBcBeCuB}B}BeCo@{@oAcDcBcHkE{Qc@uBMiAiAiOcA{Pe@uIc@qJAYkC\\[D_D^qOpDqHbB"
+      },
+      "summary": "вул. Липинського/М06",
+      "warnings": [],
+      "waypoint_order": []
+    }
+  ],
+  "status": "OK"
+}
