@@ -14,11 +14,13 @@ namespace VRPWindowsForms
     {
         private List<CarDTO> cars;
         private DatabaseContext context;
+        private List<Order> orders;
         public VRPService() { }
         public VRPService(List<CarDTO> cars)
         {
             this.cars = cars;
             context = new DatabaseContext();
+            orders = context.Orders.Include(item => item.Car).Include(item => item.OrderStatus).Include(item => item.DeliveryAddress).ToList();
         }
         public List<MapRouteDTO> GetRoutes()
         {
@@ -47,8 +49,17 @@ namespace VRPWindowsForms
 
             List<MapPoint> leftPoints = new List<MapPoint>(car.Orders);
 
+            List<MapPoint> badPoints = new List<MapPoint>();
+
+            int time = 9 * 60; //start time = 9 AM in minutes
+            int stop = 15; //default delay when delivered
+
             while (leftPoints.Count > 0)
             {
+                if (time >= 18 * 60)
+                {
+                    break;
+                }
                 var order = leftPoints.First();
                 if (result.Points.Count == 0)
                 {
@@ -60,6 +71,7 @@ namespace VRPWindowsForms
                         Lng = firstPoint.Lng
                     });
                 }
+
                 MapRoute currentRoute = new MapRoute("");
 
                 currentRoute = map.GetRoutes(finished.Last(), order);
@@ -74,15 +86,29 @@ namespace VRPWindowsForms
                     {
                         MapRoute checkRoute = new MapRoute("");
                         checkRoute = map.GetRoutes(finished.Last(), point);
-                        if (minDistance > checkRoute.Distance)
+
+                        var orderDB = orders.Where(item => item.ID == point.ID).FirstOrDefault();
+
+                        if (orderDB != null)
                         {
-                            currentRoute = checkRoute;
-                            minDistance = checkRoute.Distance;
-                            pointToDelete = point;
+                            int beginTimeMin = orderDB.AvailableStartTime.Hours * 60 + orderDB.AvailableStartTime.Minutes;
+                            int endTimeMin = orderDB.AvailableEndTime.Hours * 60 + orderDB.AvailableEndTime.Minutes;
+                            if (beginTimeMin <= (time + (Convert.ToInt32(checkRoute.Duration) / 60)) 
+                                && endTimeMin >= (time + (Convert.ToInt32(checkRoute.Duration) / 60)))
+                            {
+                                if (minDistance > checkRoute.Distance)
+                                {
+                                    currentRoute = checkRoute;
+                                    minDistance = checkRoute.Distance;
+                                    pointToDelete = point;
+                                }  
+                            }
                         }
                     }
                 }
 
+                time += Convert.ToInt32(Math.Round(Convert.ToDecimal(currentRoute.Duration) / 60, 0));
+                time += stop;
                 leftPoints.Remove(pointToDelete);
                 finished.Add(pointToDelete);
                 result.Points.AddRange(currentRoute.Points);

@@ -364,7 +364,12 @@ namespace VRPWindowsForms
             }
 
             var storeDTO = (StoreDTO)comboBox1.SelectedItem;
-            var store = context.Stores.Where(item => item.ID == storeDTO.ID).Include(item => item.Address).FirstOrDefault();
+
+            Store store = null;
+            if (storeDTO != null)
+            {
+                store = context.Stores.Where(item => item.ID == storeDTO.ID).Include(item => item.Address).FirstOrDefault(); 
+            }
 
             storePointsOverlay.Markers.Clear();
 
