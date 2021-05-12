@@ -111,6 +111,7 @@
     <Compile Include="DatabaseContext.cs" />
     <Compile Include="DTO\CarDTO.cs" />
     <Compile Include="DTO\MapPoint.cs" />
+    <Compile Include="DTO\MapRouteDTO.cs" />
     <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="DTO\Route.cs" />
     <Compile Include="DTO\StoreDTO.cs" />

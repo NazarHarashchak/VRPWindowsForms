@@ -27,7 +27,7 @@ namespace VRPWindowsForms
         GMapOverlay routesOverlay;
         private List<Order> Orders;
         private List<Car> Cars;
-        private List<MapRoute> routes;
+        private List<MapRouteDTO> routes;
         private static BindingList<MapPoint> points;
         private static BindingList<MapPoint> addedPoints;
         private static BindingList<OrderDTO> orders;
@@ -49,7 +49,7 @@ namespace VRPWindowsForms
             orders = new BindingList<OrderDTO>();
             stores = new BindingList<StoreDTO>();
 
-            routes = new List<MapRoute>();
+            routes = new List<MapRouteDTO>();
 
             // Initialization of map
             gmap.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
@@ -181,7 +181,7 @@ namespace VRPWindowsForms
 
             List<CarDTO> cars = new List<CarDTO>();
 
-            foreach(var item in addedPoints)
+            foreach (var item in addedPoints)
             {
                 var car = new CarDTO()
                 {
@@ -208,8 +208,8 @@ namespace VRPWindowsForms
             waysTabControl.TabPages.Clear();
             foreach (var car in cars)
             {
-                DataGridView dataGrid = new DataGridView() 
-                { 
+                DataGridView dataGrid = new DataGridView()
+                {
                     Name = "wayDataGrid" + car.ID,
                     Width = 439,
                     Height = 117,
@@ -227,9 +227,11 @@ namespace VRPWindowsForms
 
             VRPService vrp = new VRPService(cars);
 
-            routes = new List<MapRoute>();
+            routes = new List<MapRouteDTO>();
 
             routes = vrp.GetRoutes();
+
+            RedrawRoutes(cars[0].ID);
         }
 
         private void LoadOrders()
@@ -450,18 +452,15 @@ namespace VRPWindowsForms
 
         private void RedrawRoutes(int carID)
         {
+            var currentRoute = routes.Where(item => item.CarID == carID).FirstOrDefault();
+
             //Show route
 
-            //GoogleMap mapProvider = new GoogleMap();
-            // MapRoute route = new MapRoute("My way");
+            GoogleMap mapProvider = new GoogleMap();
+            MapRoute route = new MapRoute(currentRoute.Route);
 
-            //for (int i = 1; i < addedPoints.Count; i++)
-            //{
-            //    route = mapProvider.GetRoutes(addedPoints[i - 1], addedPoints[i]);
-
-            //    GMapRoute myRoute = new GMapRoute(route.Points, "My route");
-            //    routesOverlay.Routes.Add(myRoute);
-            //}
+            GMapRoute myRoute = new GMapRoute(route.Points, "My route");
+            routesOverlay.Routes.Add(myRoute);
         }
     }
 }
