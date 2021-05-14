@@ -26,6 +26,7 @@ namespace VRPWindowsForms
         GMapOverlay storePointsOverlay;
         GMapOverlay routesOverlay;
         private List<Order> Orders;
+        private List<OrderDTO> OrdersDTO;
         private List<Car> Cars;
         private List<MapRouteDTO> routes;
         private static BindingList<MapPoint> points;
@@ -43,6 +44,7 @@ namespace VRPWindowsForms
             data.GetSample();
 
             Orders = new List<Order>();
+            OrdersDTO = new List<OrderDTO>();
             Cars = new List<Car>();
             points = new BindingList<MapPoint>();
             addedPoints = new BindingList<MapPoint>();
@@ -86,6 +88,10 @@ namespace VRPWindowsForms
             LoadStores();
 
             LoadCars();
+
+            LoadCustomers();
+
+            LoadFilter();
         }
         private void AddedRouteGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -288,6 +294,8 @@ namespace VRPWindowsForms
                 }
             }
 
+            OrdersDTO = new List<OrderDTO>(orders);
+
             ordersDataGrid.Columns.Clear();
 
             ordersDataGrid.DataSource = new BindingSource(orders, null);
@@ -368,7 +376,7 @@ namespace VRPWindowsForms
             Store store = null;
             if (storeDTO != null)
             {
-                store = context.Stores.Where(item => item.ID == storeDTO.ID).Include(item => item.Address).FirstOrDefault(); 
+                store = context.Stores.Where(item => item.ID == storeDTO.ID).Include(item => item.Address).FirstOrDefault();
             }
 
             storePointsOverlay.Markers.Clear();
@@ -409,6 +417,10 @@ namespace VRPWindowsForms
             LoadStores();
 
             LoadCars();
+
+            LoadCustomers();
+
+            ClearFilter();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -466,6 +478,73 @@ namespace VRPWindowsForms
 
             GMapRoute myRoute = new GMapRoute(route.Points, "My route");
             routesOverlay.Routes.Add(myRoute);
+        }
+
+        private void storeFilterBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FilterOutOrders();
+        }
+        private void LoadFilter()
+        {
+            storeFilterBox.Items.Add("All");
+
+            for (int i = 0; i < stores.Count; i++)
+            {
+                storeFilterBox.Items.Add(stores[i].StoreName);
+            }
+
+            statusFilterBox.Items.Add("All");
+
+            var statuses = context.OrderStatuses.ToList();
+            for (int i = 0; i < statuses.Count; i++)
+            {
+                statusFilterBox.Items.Add(statuses[i].Status);
+            }
+
+            FilterOutOrders();
+        }
+        private void ClearFilter()
+        {
+            storeFilterBox.Items.Clear();
+            statusFilterBox.Items.Clear();
+            customerNameFiltertxt.Text = null;
+            fromDateFiltertxt.ResetText();
+            toDateFiltertxt.ResetText();
+
+            FilterOutOrders();
+        }
+        private void FilterOutOrders()
+        {
+            List<OrderDTO> filtered = new List<OrderDTO>();
+
+            if (statusFilterBox.SelectedIndex > 0 && statusFilterBox.SelectedItem.ToString() != "All")
+            {
+                filtered = OrdersDTO.Where(item => item.OrderStatus.Contains(statusFilterBox.SelectedItem.ToString())).ToList();
+            }
+            else
+            {
+                filtered = OrdersDTO;
+            }
+            
+            if (storeFilterBox.SelectedIndex > 0 && storeFilterBox.SelectedItem.ToString() != "All")
+            {
+                filtered = filtered.Where(item => item.Store.Contains(storeFilterBox.SelectedItem.ToString())).ToList();
+            }
+
+            if (!string.IsNullOrEmpty(customerNameFiltertxt.Text))
+            {
+                filtered = filtered.Where(item => item.CustomerFullName.Contains(customerNameFiltertxt.Text.Trim().ToString())).ToList();
+            }
+
+            filtered = filtered.Where(item => (item.CreatedDate >= fromDateFiltertxt.Value && item.CreatedDate <= toDateFiltertxt.Value)).ToList();
+
+            orders = new BindingList<OrderDTO>(filtered);
+
+            ordersDataGrid.DataSource = new BindingSource(orders, null);
+        }
+        private void LoadCustomers()
+        {
+
         }
     }
 }

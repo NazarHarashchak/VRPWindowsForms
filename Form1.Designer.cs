@@ -48,6 +48,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.addedRouteGrid = new System.Windows.Forms.DataGridView();
             this.WaysGroupBox = new System.Windows.Forms.GroupBox();
+            this.waysTabControl = new System.Windows.Forms.TabControl();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.carsDropDown = new System.Windows.Forms.ComboBox();
             this.pointsDropDown = new System.Windows.Forms.ComboBox();
@@ -57,11 +58,26 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button3 = new System.Windows.Forms.Button();
-            this.waysTabControl = new System.Windows.Forms.TabControl();
+            this.storeFilterBox = new System.Windows.Forms.ComboBox();
+            this.statusFilterBox = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.fromDateFiltertxt = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.toDateFiltertxt = new System.Windows.Forms.DateTimePicker();
+            this.customerNameFiltertxt = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.customersDataGrid = new System.Windows.Forms.DataGridView();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
             this.Routes.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.carsDataGrid)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.storesDataGrid)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -76,7 +92,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.addedRouteGrid)).BeginInit();
             this.WaysGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customersDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // Routes
@@ -141,6 +160,17 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.label6);
+            this.groupBox6.Controls.Add(this.customerNameFiltertxt);
+            this.groupBox6.Controls.Add(this.label5);
+            this.groupBox6.Controls.Add(this.toDateFiltertxt);
+            this.groupBox6.Controls.Add(this.label4);
+            this.groupBox6.Controls.Add(this.label3);
+            this.groupBox6.Controls.Add(this.fromDateFiltertxt);
+            this.groupBox6.Controls.Add(this.label2);
+            this.groupBox6.Controls.Add(this.label1);
+            this.groupBox6.Controls.Add(this.statusFilterBox);
+            this.groupBox6.Controls.Add(this.storeFilterBox);
             this.groupBox6.Location = new System.Drawing.Point(697, 6);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(513, 166);
@@ -329,6 +359,15 @@
             this.WaysGroupBox.TabStop = false;
             this.WaysGroupBox.Text = "Ways";
             // 
+            // waysTabControl
+            // 
+            this.waysTabControl.Location = new System.Drawing.Point(8, 19);
+            this.waysTabControl.Name = "waysTabControl";
+            this.waysTabControl.SelectedIndex = 0;
+            this.waysTabControl.Size = new System.Drawing.Size(459, 152);
+            this.waysTabControl.TabIndex = 0;
+            this.waysTabControl.TabIndexChanged += new System.EventHandler(this.waysTabControl_TabIndexChanged);
+            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.carsDropDown);
@@ -382,6 +421,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.groupBox10);
+            this.tabPage3.Controls.Add(this.groupBox9);
+            this.tabPage3.Controls.Add(this.groupBox8);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(1216, 494);
@@ -415,14 +457,140 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // waysTabControl
+            // storeFilterBox
             // 
-            this.waysTabControl.Location = new System.Drawing.Point(8, 19);
-            this.waysTabControl.Name = "waysTabControl";
-            this.waysTabControl.SelectedIndex = 0;
-            this.waysTabControl.Size = new System.Drawing.Size(459, 152);
-            this.waysTabControl.TabIndex = 0;
-            this.waysTabControl.TabIndexChanged += new System.EventHandler(this.waysTabControl_TabIndexChanged);
+            this.storeFilterBox.FormattingEnabled = true;
+            this.storeFilterBox.Location = new System.Drawing.Point(6, 44);
+            this.storeFilterBox.Name = "storeFilterBox";
+            this.storeFilterBox.Size = new System.Drawing.Size(121, 21);
+            this.storeFilterBox.TabIndex = 0;
+            this.storeFilterBox.Text = "Select store";
+            this.storeFilterBox.SelectedIndexChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
+            // 
+            // statusFilterBox
+            // 
+            this.statusFilterBox.FormattingEnabled = true;
+            this.statusFilterBox.Location = new System.Drawing.Point(170, 44);
+            this.statusFilterBox.Name = "statusFilterBox";
+            this.statusFilterBox.Size = new System.Drawing.Size(121, 21);
+            this.statusFilterBox.TabIndex = 1;
+            this.statusFilterBox.Text = "Select status";
+            this.statusFilterBox.SelectedIndexChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(44, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Store";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(210, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Status";
+            // 
+            // fromDateFiltertxt
+            // 
+            this.fromDateFiltertxt.Location = new System.Drawing.Point(6, 127);
+            this.fromDateFiltertxt.Name = "fromDateFiltertxt";
+            this.fromDateFiltertxt.Size = new System.Drawing.Size(200, 20);
+            this.fromDateFiltertxt.TabIndex = 4;
+            this.fromDateFiltertxt.ValueChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(44, 111);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "From";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(187, 94);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Date range";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(261, 111);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(20, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "To";
+            // 
+            // toDateFiltertxt
+            // 
+            this.toDateFiltertxt.Location = new System.Drawing.Point(223, 127);
+            this.toDateFiltertxt.Name = "toDateFiltertxt";
+            this.toDateFiltertxt.Size = new System.Drawing.Size(200, 20);
+            this.toDateFiltertxt.TabIndex = 7;
+            this.toDateFiltertxt.ValueChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
+            // 
+            // customerNameFiltertxt
+            // 
+            this.customerNameFiltertxt.Location = new System.Drawing.Point(337, 45);
+            this.customerNameFiltertxt.Name = "customerNameFiltertxt";
+            this.customerNameFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.customerNameFiltertxt.TabIndex = 9;
+            this.customerNameFiltertxt.TextChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(373, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Customer name";
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.customersDataGrid);
+            this.groupBox8.Location = new System.Drawing.Point(3, 3);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(685, 488);
+            this.groupBox8.TabIndex = 0;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Customers";
+            // 
+            // customersDataGrid
+            // 
+            this.customersDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.customersDataGrid.Location = new System.Drawing.Point(6, 19);
+            this.customersDataGrid.Name = "customersDataGrid";
+            this.customersDataGrid.RowHeadersVisible = false;
+            this.customersDataGrid.Size = new System.Drawing.Size(673, 461);
+            this.customersDataGrid.TabIndex = 0;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Location = new System.Drawing.Point(694, 3);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(518, 211);
+            this.groupBox9.TabIndex = 1;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Filter";
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Location = new System.Drawing.Point(694, 220);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(518, 100);
+            this.groupBox10.TabIndex = 2;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Add new customer";
             // 
             // Form1
             // 
@@ -439,6 +607,8 @@
             this.tabPage2.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.carsDataGrid)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.storesDataGrid)).EndInit();
             this.groupBox4.ResumeLayout(false);
@@ -454,8 +624,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.addedRouteGrid)).EndInit();
             this.WaysGroupBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.customersDataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -493,6 +666,21 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView carsDataGrid;
         private System.Windows.Forms.TabControl waysTabControl;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox statusFilterBox;
+        private System.Windows.Forms.ComboBox storeFilterBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox customerNameFiltertxt;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker toDateFiltertxt;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DateTimePicker fromDateFiltertxt;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.DataGridView customersDataGrid;
     }
 }
 
