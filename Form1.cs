@@ -33,6 +33,7 @@ namespace VRPWindowsForms
         private static BindingList<MapPoint> addedPoints;
         private static BindingList<OrderDTO> orders;
         private static BindingList<StoreDTO> stores;
+        private static BindingList<CustomerDTO> customers; 
         private DatabaseContext context;
         public Form1()
         {
@@ -50,6 +51,7 @@ namespace VRPWindowsForms
             addedPoints = new BindingList<MapPoint>();
             orders = new BindingList<OrderDTO>();
             stores = new BindingList<StoreDTO>();
+            customers = new BindingList<CustomerDTO>();
 
             routes = new List<MapRouteDTO>();
 
@@ -92,6 +94,8 @@ namespace VRPWindowsForms
             LoadCustomers();
 
             LoadFilter();
+
+            SetCustomerFilter();
         }
         private void AddedRouteGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -421,6 +425,8 @@ namespace VRPWindowsForms
             LoadCustomers();
 
             ClearFilter();
+
+            ClearCustomerFilter();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -533,7 +539,7 @@ namespace VRPWindowsForms
 
             if (!string.IsNullOrEmpty(customerNameFiltertxt.Text))
             {
-                filtered = filtered.Where(item => item.CustomerFullName.Contains(customerNameFiltertxt.Text.Trim().ToString())).ToList();
+                filtered = filtered.Where(item => item.CustomerFullName.ToLower().Contains(customerNameFiltertxt.Text.ToLower().Trim().ToString())).ToList();
             }
 
             filtered = filtered.Where(item => (item.CreatedDate >= fromDateFiltertxt.Value && item.CreatedDate <= toDateFiltertxt.Value)).ToList();
@@ -544,7 +550,73 @@ namespace VRPWindowsForms
         }
         private void LoadCustomers()
         {
+            var customersDB = context.Customers.Include(item => item.Address).ToList();
+            foreach(var customer in customersDB)
+            {
+                customers.Add(new CustomerDTO() { 
+                    ID = customer.ID,
+                    Name = customer.Name,
+                    SecondName = customer.SecondName,
+                    Age = customer.Age,
+                    PhoneNumber = customer.PhoneNumber,
+                    Email = customer.Email,
+                    Address = customer.Address != null ? GetAddressService.ToShortAddress(customer.Address) : ""
+                });
+            }
 
+            customersDataGrid.DataSource = new BindingSource(customers, null);
+        }
+
+        private void emailFiltertxt_TextChanged(object sender, EventArgs e)
+        {
+            SetCustomerFilter();
+        }
+        private void ClearCustomerFilter()
+        {
+            nameFiltertxt.Text = null;
+            secondNameFiltertxt.Text = null;
+            emailFiltertxt.Text = null;
+            phoneNumberFiltertxt.Text = null;
+
+            SetCustomerFilter();
+        }
+        private void SetCustomerFilter()
+        {
+            var filtered = context.Customers.Include(item => item.Address).ToList();
+
+            if (!string.IsNullOrEmpty(nameFiltertxt.Text))
+            {
+                filtered = filtered.Where(item => item.Name.ToLower().Contains(nameFiltertxt.Text.ToLower().Trim().ToString())).ToList();
+            }
+            if (!string.IsNullOrEmpty(secondNameFiltertxt.Text))
+            {
+                filtered = filtered.Where(item => item.SecondName.ToLower().Contains(secondNameFiltertxt.Text.ToLower().Trim().ToString())).ToList();
+            }
+            if (!string.IsNullOrEmpty(emailFiltertxt.Text))
+            {
+                filtered = filtered.Where(item => item.Email.ToLower().Contains(emailFiltertxt.Text.ToLower().Trim().ToString())).ToList();
+            }
+            if (!string.IsNullOrEmpty(phoneNumberFiltertxt.Text))
+            {
+                filtered = filtered.Where(item => item.PhoneNumber.ToLower().Contains(phoneNumberFiltertxt.Text.ToLower().Trim().ToString())).ToList();
+            }
+
+            customers.Clear();
+            foreach (var customer in filtered)
+            {
+                customers.Add(new CustomerDTO()
+                {
+                    ID = customer.ID,
+                    Name = customer.Name,
+                    SecondName = customer.SecondName,
+                    Age = customer.Age,
+                    PhoneNumber = customer.PhoneNumber,
+                    Email = customer.Email,
+                    Address = customer.Address != null ? GetAddressService.ToShortAddress(customer.Address) : ""
+                });
+            }
+
+            customersDataGrid.DataSource = new BindingSource(customers, null);
         }
     }
 }

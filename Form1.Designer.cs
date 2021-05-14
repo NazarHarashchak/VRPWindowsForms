@@ -73,6 +73,14 @@
             this.customersDataGrid = new System.Windows.Forms.DataGridView();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.nameFiltertxt = new System.Windows.Forms.TextBox();
+            this.secondNameFiltertxt = new System.Windows.Forms.TextBox();
+            this.emailFiltertxt = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.phoneNumberFiltertxt = new System.Windows.Forms.TextBox();
             this.Routes.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -96,6 +104,7 @@
             this.menuStrip1.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customersDataGrid)).BeginInit();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // Routes
@@ -567,6 +576,8 @@
             // 
             // customersDataGrid
             // 
+            this.customersDataGrid.AllowUserToAddRows = false;
+            this.customersDataGrid.AllowUserToDeleteRows = false;
             this.customersDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.customersDataGrid.Location = new System.Drawing.Point(6, 19);
             this.customersDataGrid.Name = "customersDataGrid";
@@ -576,6 +587,14 @@
             // 
             // groupBox9
             // 
+            this.groupBox9.Controls.Add(this.label10);
+            this.groupBox9.Controls.Add(this.phoneNumberFiltertxt);
+            this.groupBox9.Controls.Add(this.label9);
+            this.groupBox9.Controls.Add(this.label8);
+            this.groupBox9.Controls.Add(this.label7);
+            this.groupBox9.Controls.Add(this.emailFiltertxt);
+            this.groupBox9.Controls.Add(this.secondNameFiltertxt);
+            this.groupBox9.Controls.Add(this.nameFiltertxt);
             this.groupBox9.Location = new System.Drawing.Point(694, 3);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(518, 211);
@@ -591,6 +610,74 @@
             this.groupBox10.TabIndex = 2;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Add new customer";
+            // 
+            // nameFiltertxt
+            // 
+            this.nameFiltertxt.Location = new System.Drawing.Point(69, 45);
+            this.nameFiltertxt.Name = "nameFiltertxt";
+            this.nameFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.nameFiltertxt.TabIndex = 0;
+            this.nameFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
+            // 
+            // secondNameFiltertxt
+            // 
+            this.secondNameFiltertxt.Location = new System.Drawing.Point(69, 103);
+            this.secondNameFiltertxt.Name = "secondNameFiltertxt";
+            this.secondNameFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.secondNameFiltertxt.TabIndex = 1;
+            this.secondNameFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
+            // 
+            // emailFiltertxt
+            // 
+            this.emailFiltertxt.Location = new System.Drawing.Point(295, 45);
+            this.emailFiltertxt.Name = "emailFiltertxt";
+            this.emailFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.emailFiltertxt.TabIndex = 2;
+            this.emailFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(107, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Name";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(95, 87);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(73, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Second name";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(336, 29);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Email";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(322, 87);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 13);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Phone number";
+            // 
+            // phoneNumberFiltertxt
+            // 
+            this.phoneNumberFiltertxt.Location = new System.Drawing.Point(295, 103);
+            this.phoneNumberFiltertxt.Name = "phoneNumberFiltertxt";
+            this.phoneNumberFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.phoneNumberFiltertxt.TabIndex = 6;
+            this.phoneNumberFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
             // 
             // Form1
             // 
@@ -629,6 +716,8 @@
             this.menuStrip1.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.customersDataGrid)).EndInit();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -681,6 +770,14 @@
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.DataGridView customersDataGrid;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox phoneNumberFiltertxt;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox emailFiltertxt;
+        private System.Windows.Forms.TextBox secondNameFiltertxt;
+        private System.Windows.Forms.TextBox nameFiltertxt;
     }
 }
 
