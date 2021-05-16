@@ -618,5 +618,11 @@ namespace VRPWindowsForms
 
             customersDataGrid.DataSource = new BindingSource(customers, null);
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            AddNewCustomerForm form = new AddNewCustomerForm();
+            form.Show();
+        }
     }
 }

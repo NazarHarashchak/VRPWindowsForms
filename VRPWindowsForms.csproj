@@ -117,6 +117,12 @@
     <Compile Include="AddNewCarForm.Designer.cs">
       <DependentUpon>AddNewCarForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddNewCustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddNewCustomerForm.Designer.cs">
+      <DependentUpon>AddNewCustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddNewOrderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     <Compile Include="Services\VRPService.cs" />
     <EmbeddedResource Include="AddNewCarForm.resx">
       <DependentUpon>AddNewCarForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddNewCustomerForm.resx">
+      <DependentUpon>AddNewCustomerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddNewOrderForm.resx">
       <DependentUpon>AddNewOrderForm.cs</DependentUpon>

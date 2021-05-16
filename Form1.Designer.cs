@@ -34,6 +34,17 @@
             this.button4 = new System.Windows.Forms.Button();
             this.carsDataGrid = new System.Windows.Forms.DataGridView();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.customerNameFiltertxt = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.toDateFiltertxt = new System.Windows.Forms.DateTimePicker();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.fromDateFiltertxt = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.statusFilterBox = new System.Windows.Forms.ComboBox();
+            this.storeFilterBox = new System.Windows.Forms.ComboBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.createStoreButton = new System.Windows.Forms.Button();
             this.storesDataGrid = new System.Windows.Forms.DataGridView();
@@ -55,32 +66,22 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.phoneNumberFiltertxt = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.emailFiltertxt = new System.Windows.Forms.TextBox();
+            this.secondNameFiltertxt = new System.Windows.Forms.TextBox();
+            this.nameFiltertxt = new System.Windows.Forms.TextBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.customersDataGrid = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button3 = new System.Windows.Forms.Button();
-            this.storeFilterBox = new System.Windows.Forms.ComboBox();
-            this.statusFilterBox = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.fromDateFiltertxt = new System.Windows.Forms.DateTimePicker();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.toDateFiltertxt = new System.Windows.Forms.DateTimePicker();
-            this.customerNameFiltertxt = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.customersDataGrid = new System.Windows.Forms.DataGridView();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.nameFiltertxt = new System.Windows.Forms.TextBox();
-            this.secondNameFiltertxt = new System.Windows.Forms.TextBox();
-            this.emailFiltertxt = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.phoneNumberFiltertxt = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.Routes.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -101,10 +102,11 @@
             this.WaysGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.groupBox10.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customersDataGrid)).BeginInit();
-            this.groupBox9.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Routes
@@ -112,7 +114,7 @@
             this.Routes.Controls.Add(this.tabPage2);
             this.Routes.Controls.Add(this.tabPage1);
             this.Routes.Controls.Add(this.tabPage3);
-            this.Routes.Location = new System.Drawing.Point(-1, 28);
+            this.Routes.Location = new System.Drawing.Point(-1, 27);
             this.Routes.Name = "Routes";
             this.Routes.SelectedIndex = 0;
             this.Routes.Size = new System.Drawing.Size(1224, 520);
@@ -186,6 +188,104 @@
             this.groupBox6.TabIndex = 3;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Filter";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(373, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Customer name";
+            // 
+            // customerNameFiltertxt
+            // 
+            this.customerNameFiltertxt.Location = new System.Drawing.Point(337, 45);
+            this.customerNameFiltertxt.Name = "customerNameFiltertxt";
+            this.customerNameFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.customerNameFiltertxt.TabIndex = 9;
+            this.customerNameFiltertxt.TextChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(261, 111);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(20, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "To";
+            // 
+            // toDateFiltertxt
+            // 
+            this.toDateFiltertxt.Location = new System.Drawing.Point(223, 127);
+            this.toDateFiltertxt.Name = "toDateFiltertxt";
+            this.toDateFiltertxt.Size = new System.Drawing.Size(200, 20);
+            this.toDateFiltertxt.TabIndex = 7;
+            this.toDateFiltertxt.ValueChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(187, 94);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(60, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Date range";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(44, 111);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "From";
+            // 
+            // fromDateFiltertxt
+            // 
+            this.fromDateFiltertxt.Location = new System.Drawing.Point(6, 127);
+            this.fromDateFiltertxt.Name = "fromDateFiltertxt";
+            this.fromDateFiltertxt.Size = new System.Drawing.Size(200, 20);
+            this.fromDateFiltertxt.TabIndex = 4;
+            this.fromDateFiltertxt.ValueChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(210, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(37, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Status";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(44, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(32, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Store";
+            // 
+            // statusFilterBox
+            // 
+            this.statusFilterBox.FormattingEnabled = true;
+            this.statusFilterBox.Location = new System.Drawing.Point(170, 44);
+            this.statusFilterBox.Name = "statusFilterBox";
+            this.statusFilterBox.Size = new System.Drawing.Size(121, 21);
+            this.statusFilterBox.TabIndex = 1;
+            this.statusFilterBox.Text = "Select status";
+            this.statusFilterBox.SelectedIndexChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
+            // 
+            // storeFilterBox
+            // 
+            this.storeFilterBox.FormattingEnabled = true;
+            this.storeFilterBox.Location = new System.Drawing.Point(6, 44);
+            this.storeFilterBox.Name = "storeFilterBox";
+            this.storeFilterBox.Size = new System.Drawing.Size(121, 21);
+            this.storeFilterBox.TabIndex = 0;
+            this.storeFilterBox.Text = "Select store";
+            this.storeFilterBox.SelectedIndexChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
             // 
             // groupBox5
             // 
@@ -440,6 +540,122 @@
             this.tabPage3.Text = "Customers";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.button5);
+            this.groupBox10.Location = new System.Drawing.Point(694, 220);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(518, 100);
+            this.groupBox10.TabIndex = 2;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Add new customer";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label10);
+            this.groupBox9.Controls.Add(this.phoneNumberFiltertxt);
+            this.groupBox9.Controls.Add(this.label9);
+            this.groupBox9.Controls.Add(this.label8);
+            this.groupBox9.Controls.Add(this.label7);
+            this.groupBox9.Controls.Add(this.emailFiltertxt);
+            this.groupBox9.Controls.Add(this.secondNameFiltertxt);
+            this.groupBox9.Controls.Add(this.nameFiltertxt);
+            this.groupBox9.Location = new System.Drawing.Point(694, 3);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(518, 211);
+            this.groupBox9.TabIndex = 1;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Filter";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(322, 87);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(76, 13);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Phone number";
+            // 
+            // phoneNumberFiltertxt
+            // 
+            this.phoneNumberFiltertxt.Location = new System.Drawing.Point(295, 103);
+            this.phoneNumberFiltertxt.Name = "phoneNumberFiltertxt";
+            this.phoneNumberFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.phoneNumberFiltertxt.TabIndex = 6;
+            this.phoneNumberFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(336, 29);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(32, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Email";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(95, 87);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(73, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "Second name";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(107, 26);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.TabIndex = 3;
+            this.label7.Text = "Name";
+            // 
+            // emailFiltertxt
+            // 
+            this.emailFiltertxt.Location = new System.Drawing.Point(295, 45);
+            this.emailFiltertxt.Name = "emailFiltertxt";
+            this.emailFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.emailFiltertxt.TabIndex = 2;
+            this.emailFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
+            // 
+            // secondNameFiltertxt
+            // 
+            this.secondNameFiltertxt.Location = new System.Drawing.Point(69, 103);
+            this.secondNameFiltertxt.Name = "secondNameFiltertxt";
+            this.secondNameFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.secondNameFiltertxt.TabIndex = 1;
+            this.secondNameFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
+            // 
+            // nameFiltertxt
+            // 
+            this.nameFiltertxt.Location = new System.Drawing.Point(69, 45);
+            this.nameFiltertxt.Name = "nameFiltertxt";
+            this.nameFiltertxt.Size = new System.Drawing.Size(140, 20);
+            this.nameFiltertxt.TabIndex = 0;
+            this.nameFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.customersDataGrid);
+            this.groupBox8.Location = new System.Drawing.Point(3, 3);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(685, 488);
+            this.groupBox8.TabIndex = 0;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Customers";
+            // 
+            // customersDataGrid
+            // 
+            this.customersDataGrid.AllowUserToAddRows = false;
+            this.customersDataGrid.AllowUserToDeleteRows = false;
+            this.customersDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.customersDataGrid.Location = new System.Drawing.Point(6, 19);
+            this.customersDataGrid.Name = "customersDataGrid";
+            this.customersDataGrid.RowHeadersVisible = false;
+            this.customersDataGrid.Size = new System.Drawing.Size(673, 461);
+            this.customersDataGrid.TabIndex = 0;
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -466,218 +682,15 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // storeFilterBox
+            // button5
             // 
-            this.storeFilterBox.FormattingEnabled = true;
-            this.storeFilterBox.Location = new System.Drawing.Point(6, 44);
-            this.storeFilterBox.Name = "storeFilterBox";
-            this.storeFilterBox.Size = new System.Drawing.Size(121, 21);
-            this.storeFilterBox.TabIndex = 0;
-            this.storeFilterBox.Text = "Select store";
-            this.storeFilterBox.SelectedIndexChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
-            // 
-            // statusFilterBox
-            // 
-            this.statusFilterBox.FormattingEnabled = true;
-            this.statusFilterBox.Location = new System.Drawing.Point(170, 44);
-            this.statusFilterBox.Name = "statusFilterBox";
-            this.statusFilterBox.Size = new System.Drawing.Size(121, 21);
-            this.statusFilterBox.TabIndex = 1;
-            this.statusFilterBox.Text = "Select status";
-            this.statusFilterBox.SelectedIndexChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(32, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Store";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(210, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Status";
-            // 
-            // fromDateFiltertxt
-            // 
-            this.fromDateFiltertxt.Location = new System.Drawing.Point(6, 127);
-            this.fromDateFiltertxt.Name = "fromDateFiltertxt";
-            this.fromDateFiltertxt.Size = new System.Drawing.Size(200, 20);
-            this.fromDateFiltertxt.TabIndex = 4;
-            this.fromDateFiltertxt.ValueChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 111);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "From";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(187, 94);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Date range";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(261, 111);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(20, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "To";
-            // 
-            // toDateFiltertxt
-            // 
-            this.toDateFiltertxt.Location = new System.Drawing.Point(223, 127);
-            this.toDateFiltertxt.Name = "toDateFiltertxt";
-            this.toDateFiltertxt.Size = new System.Drawing.Size(200, 20);
-            this.toDateFiltertxt.TabIndex = 7;
-            this.toDateFiltertxt.ValueChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
-            // 
-            // customerNameFiltertxt
-            // 
-            this.customerNameFiltertxt.Location = new System.Drawing.Point(337, 45);
-            this.customerNameFiltertxt.Name = "customerNameFiltertxt";
-            this.customerNameFiltertxt.Size = new System.Drawing.Size(140, 20);
-            this.customerNameFiltertxt.TabIndex = 9;
-            this.customerNameFiltertxt.TextChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(373, 28);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 13);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Customer name";
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.customersDataGrid);
-            this.groupBox8.Location = new System.Drawing.Point(3, 3);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(685, 488);
-            this.groupBox8.TabIndex = 0;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Customers";
-            // 
-            // customersDataGrid
-            // 
-            this.customersDataGrid.AllowUserToAddRows = false;
-            this.customersDataGrid.AllowUserToDeleteRows = false;
-            this.customersDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customersDataGrid.Location = new System.Drawing.Point(6, 19);
-            this.customersDataGrid.Name = "customersDataGrid";
-            this.customersDataGrid.RowHeadersVisible = false;
-            this.customersDataGrid.Size = new System.Drawing.Size(673, 461);
-            this.customersDataGrid.TabIndex = 0;
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.label10);
-            this.groupBox9.Controls.Add(this.phoneNumberFiltertxt);
-            this.groupBox9.Controls.Add(this.label9);
-            this.groupBox9.Controls.Add(this.label8);
-            this.groupBox9.Controls.Add(this.label7);
-            this.groupBox9.Controls.Add(this.emailFiltertxt);
-            this.groupBox9.Controls.Add(this.secondNameFiltertxt);
-            this.groupBox9.Controls.Add(this.nameFiltertxt);
-            this.groupBox9.Location = new System.Drawing.Point(694, 3);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(518, 211);
-            this.groupBox9.TabIndex = 1;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Filter";
-            // 
-            // groupBox10
-            // 
-            this.groupBox10.Location = new System.Drawing.Point(694, 220);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(518, 100);
-            this.groupBox10.TabIndex = 2;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Add new customer";
-            // 
-            // nameFiltertxt
-            // 
-            this.nameFiltertxt.Location = new System.Drawing.Point(69, 45);
-            this.nameFiltertxt.Name = "nameFiltertxt";
-            this.nameFiltertxt.Size = new System.Drawing.Size(140, 20);
-            this.nameFiltertxt.TabIndex = 0;
-            this.nameFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
-            // 
-            // secondNameFiltertxt
-            // 
-            this.secondNameFiltertxt.Location = new System.Drawing.Point(69, 103);
-            this.secondNameFiltertxt.Name = "secondNameFiltertxt";
-            this.secondNameFiltertxt.Size = new System.Drawing.Size(140, 20);
-            this.secondNameFiltertxt.TabIndex = 1;
-            this.secondNameFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
-            // 
-            // emailFiltertxt
-            // 
-            this.emailFiltertxt.Location = new System.Drawing.Point(295, 45);
-            this.emailFiltertxt.Name = "emailFiltertxt";
-            this.emailFiltertxt.Size = new System.Drawing.Size(140, 20);
-            this.emailFiltertxt.TabIndex = 2;
-            this.emailFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(107, 26);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
-            this.label7.TabIndex = 3;
-            this.label7.Text = "Name";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(95, 87);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Second name";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(336, 29);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(32, 13);
-            this.label9.TabIndex = 5;
-            this.label9.Text = "Email";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(322, 87);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(76, 13);
-            this.label10.TabIndex = 7;
-            this.label10.Text = "Phone number";
-            // 
-            // phoneNumberFiltertxt
-            // 
-            this.phoneNumberFiltertxt.Location = new System.Drawing.Point(295, 103);
-            this.phoneNumberFiltertxt.Name = "phoneNumberFiltertxt";
-            this.phoneNumberFiltertxt.Size = new System.Drawing.Size(140, 20);
-            this.phoneNumberFiltertxt.TabIndex = 6;
-            this.phoneNumberFiltertxt.TextChanged += new System.EventHandler(this.emailFiltertxt_TextChanged);
+            this.button5.Location = new System.Drawing.Point(207, 47);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(121, 36);
+            this.button5.TabIndex = 0;
+            this.button5.Text = "Add";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
@@ -712,12 +725,13 @@
             this.WaysGroupBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.customersDataGrid)).EndInit();
+            this.groupBox10.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
+            this.groupBox8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.customersDataGrid)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -778,6 +792,7 @@
         private System.Windows.Forms.TextBox emailFiltertxt;
         private System.Windows.Forms.TextBox secondNameFiltertxt;
         private System.Windows.Forms.TextBox nameFiltertxt;
+        private System.Windows.Forms.Button button5;
     }
 }
 
