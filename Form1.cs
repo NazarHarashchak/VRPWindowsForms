@@ -33,7 +33,7 @@ namespace VRPWindowsForms
         private static BindingList<MapPoint> addedPoints;
         private static BindingList<OrderDTO> orders;
         private static BindingList<StoreDTO> stores;
-        private static BindingList<CustomerDTO> customers; 
+        private static BindingList<CustomerDTO> customers;
         private DatabaseContext context;
         public Form1()
         {
@@ -221,9 +221,10 @@ namespace VRPWindowsForms
                 DataGridView dataGrid = new DataGridView()
                 {
                     Name = "wayDataGrid" + car.ID,
-                    Width = 439,
-                    Height = 117,
-                    Location = new Point(6, 6)
+                    Size = new Size(439, 117),
+                    Location = new Point(6, 6),
+                    Dock = DockStyle.Fill,
+                    AllowUserToAddRows = false
                 };
                 TabPage page = new TabPage()
                 {
@@ -240,6 +241,26 @@ namespace VRPWindowsForms
             routes = new List<MapRouteDTO>();
 
             routes = vrp.GetRoutes();
+
+            foreach (var route in routes)
+            {
+                TabPage page = (TabPage)waysTabControl.Controls["tabPage" + route.CarID];
+                DataGridView dataGrid = (DataGridView)page.Controls["wayDataGrid" + route.CarID];
+
+                dataGrid.RowHeadersVisible = false;
+
+                dataGrid.DataSource = new BindingSource(route.Orders, null);
+
+                dataGrid.Columns["CustomerFullName"].HeaderText = "Customer";
+                dataGrid.Columns["OrderStatus"].HeaderText = "Status";
+                dataGrid.Columns["DeliveryAddress"].HeaderText = "Address";
+                dataGrid.Columns["AvailableStartTime"].Visible = false;
+                dataGrid.Columns["AvailableEndTime"].Visible = false;
+                dataGrid.Columns["CreatedDate"].Visible = false;
+                dataGrid.Columns["Store"].Visible = false;
+                dataGrid.Columns["Lattitude"].Visible = false;
+                dataGrid.Columns["Longitude"].Visible = false;
+            }
 
             RedrawRoutes(cars[0].ID);
         }
@@ -470,12 +491,17 @@ namespace VRPWindowsForms
 
         private void waysTabControl_TabIndexChanged(object sender, EventArgs e)
         {
-            int tabIndx = 1;
+            var control = (TabControl)sender;
+            int index = control.SelectedIndex;
+            var route = routes[index];
+            RedrawRoutes(route.CarID);
         }
 
         private void RedrawRoutes(int carID)
         {
             var currentRoute = routes.Where(item => item.CarID == carID).FirstOrDefault();
+
+            routesOverlay.Routes.Clear();
 
             //Show route
 
@@ -531,7 +557,7 @@ namespace VRPWindowsForms
             {
                 filtered = OrdersDTO;
             }
-            
+
             if (storeFilterBox.SelectedIndex > 0 && storeFilterBox.SelectedItem.ToString() != "All")
             {
                 filtered = filtered.Where(item => item.Store.Contains(storeFilterBox.SelectedItem.ToString())).ToList();
@@ -551,9 +577,10 @@ namespace VRPWindowsForms
         private void LoadCustomers()
         {
             var customersDB = context.Customers.Include(item => item.Address).ToList();
-            foreach(var customer in customersDB)
+            foreach (var customer in customersDB)
             {
-                customers.Add(new CustomerDTO() { 
+                customers.Add(new CustomerDTO()
+                {
                     ID = customer.ID,
                     Name = customer.Name,
                     SecondName = customer.SecondName,

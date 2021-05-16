@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VRPWindowsForms.DTO;
 using VRPWindowsForms.Models;
+using VRPWindowsForms.Services;
 
 namespace VRPWindowsForms
 {
@@ -20,7 +21,7 @@ namespace VRPWindowsForms
         {
             this.cars = cars;
             context = new DatabaseContext();
-            orders = context.Orders.Include(item => item.Car).Include(item => item.OrderStatus).Include(item => item.DeliveryAddress).ToList();
+            orders = context.Orders.Include(item => item.Customer).Include(item => item.Car).Include(item => item.OrderStatus).Include(item => item.DeliveryAddress).ToList();
         }
         public List<MapRouteDTO> GetRoutes()
         {
@@ -29,19 +30,16 @@ namespace VRPWindowsForms
             {
                 var carDB = context.Cars.Where(item => item.ID == car.ID).Include(item => item.Store)
                                    .Include(item => item.Store.Address).FirstOrDefault();
-                result.Add(new MapRouteDTO() 
-                { 
-                    CarID = car.ID,
-                    StoreID = carDB.Store.ID,
-                    Route = this.GetRoute(car, carDB) 
-                });
+                result.Add(GetRoute(car, carDB));
             }
             return result;
         }
-        public MapRoute GetRoute(CarDTO car, Car carDB)
+        public MapRouteDTO GetRoute(CarDTO car, Car carDB)
         {
             GoogleMap map = new GoogleMap();
-            MapRoute result = new MapRoute(car.CarName);
+            MapRouteDTO result = new MapRouteDTO();
+            result.CarID = car.ID;
+            result.StoreID = carDB.Store.ID;
 
             PointLatLng firstPoint = new PointLatLng(carDB.Store.Address.Lattitude, carDB.Store.Address.Longitude);
 
@@ -50,6 +48,8 @@ namespace VRPWindowsForms
             List<MapPoint> leftPoints = new List<MapPoint>(car.Orders);
 
             List<MapPoint> badPoints = new List<MapPoint>();
+
+            int currentID = 0;
 
             int time = 9 * 60; //start time = 9 AM in minutes
             int stop = 15; //default delay when delivered
@@ -61,9 +61,9 @@ namespace VRPWindowsForms
                     break;
                 }
                 var order = leftPoints.First();
-                if (result.Points.Count == 0)
+                if (result.Route == null || result.Route.Points.Count == 0)
                 {
-                    result.Points.Add(firstPoint);
+                    result.Route.Points.Add(firstPoint);
                     finished.Add(new MapPoint()
                     {
                         CarID = 0,
@@ -75,6 +75,7 @@ namespace VRPWindowsForms
                 MapRoute currentRoute = new MapRoute("");
 
                 currentRoute = map.GetRoutes(finished.Last(), order);
+                currentID = order.ID;
 
                 double minDistance = currentRoute.Distance;
 
@@ -99,6 +100,7 @@ namespace VRPWindowsForms
                                 if (minDistance > checkRoute.Distance)
                                 {
                                     currentRoute = checkRoute;
+                                    currentID = point.ID;
                                     minDistance = checkRoute.Distance;
                                     pointToDelete = point;
                                 }  
@@ -111,14 +113,24 @@ namespace VRPWindowsForms
                 time += stop;
                 leftPoints.Remove(pointToDelete);
                 finished.Add(pointToDelete);
-                result.Points.AddRange(currentRoute.Points);
+                result.Route.Points.AddRange(currentRoute.Points);
+                var orderDBtoAdd = orders.Where(item => item.ID == currentID).FirstOrDefault();
+                result.Orders.Add(new OrderDTO() { 
+                    ID = orderDBtoAdd.ID,
+                    Store = orderDBtoAdd.Store.StoreName,
+                    Message = orderDBtoAdd.Message,
+                    Weight = orderDBtoAdd.Weight,
+                    CustomerFullName = orderDBtoAdd.Customer.Name + " " + orderDBtoAdd.Customer.SecondName,
+                    OrderStatus = orderDBtoAdd.OrderStatus.Status,
+                    DeliveryAddress = GetAddressService.ToShortAddressWithoutCity(orderDBtoAdd.DeliveryAddress)
+                });
             }
 
             var turnBackToStore = new MapRoute("");
             turnBackToStore = map.GetRoutes(
-                new MapPoint() { Lat = result.Points.Last().Lat, Lng = result.Points.Last().Lng },
+                new MapPoint() { Lat = result.Route.Points.Last().Lat, Lng = result.Route.Points.Last().Lng },
                 new MapPoint() { Lat = firstPoint.Lat, Lng = firstPoint.Lng });
-            result.Points.AddRange(turnBackToStore.Points);
+            result.Route.Points.AddRange(turnBackToStore.Points);
             return result;
         }
     }

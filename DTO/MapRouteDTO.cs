@@ -11,6 +11,12 @@ namespace VRPWindowsForms.DTO
     {
         public int StoreID { get; set; }
         public int CarID { get; set; }
+        public List<OrderDTO> Orders { get; set; }
         public MapRoute Route { get; set; }
+        public MapRouteDTO()
+        {
+            Orders = new List<OrderDTO>();
+            Route = new MapRoute("");
+        }
     }
 }
