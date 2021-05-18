@@ -29,7 +29,8 @@ namespace VRPWindowsForms
         private List<OrderDTO> OrdersDTO;
         private List<Car> Cars;
         private List<MapRouteDTO> routes;
-        private static BindingList<MapPoint> points;
+        private static List<MapPoint> points;
+        private static BindingList<MapPoint> currentStorePoints;
         private static BindingList<MapPoint> addedPoints;
         private static BindingList<OrderDTO> orders;
         private static BindingList<StoreDTO> stores;
@@ -47,7 +48,8 @@ namespace VRPWindowsForms
             Orders = new List<Order>();
             OrdersDTO = new List<OrderDTO>();
             Cars = new List<Car>();
-            points = new BindingList<MapPoint>();
+            points = new List<MapPoint>();
+            currentStorePoints = new BindingList<MapPoint>();
             addedPoints = new BindingList<MapPoint>();
             orders = new BindingList<OrderDTO>();
             stores = new BindingList<StoreDTO>();
@@ -67,7 +69,7 @@ namespace VRPWindowsForms
             storePointsOverlay = new GMapOverlay("markers");
             gmap.Overlays.Add(storePointsOverlay);
 
-            pointsDropDown.DataSource = new BindingSource(points, null);
+            pointsDropDown.DataSource = new BindingSource(currentStorePoints, null);
             pointsDropDown.DisplayMember = "StreetName";
             addedRouteGrid.DataSource = new BindingSource(addedPoints, null);
             addedRouteGrid.Columns["CarID"].Visible = false;
@@ -85,9 +87,9 @@ namespace VRPWindowsForms
             comboBox1.DataSource = new BindingSource(stores, null);
             comboBox1.DisplayMember = "StoreName";
 
-            LoadOrders();
-
             LoadStores();
+
+            LoadOrders();
 
             LoadCars();
 
@@ -146,6 +148,7 @@ namespace VRPWindowsForms
             AddMarkerOnMap(selectedPoint.Lat, selectedPoint.Lng);
 
             points.Remove(selectedPoint);
+            ReloadCurrentStorePoint();
         }
         private void RemoveFromAddDataGrid(MapPoint point)
         {
@@ -158,6 +161,7 @@ namespace VRPWindowsForms
             RemoveMarkerFromMap(point.Lat, point.Lng);
 
             points.Add(point);
+            ReloadCurrentStorePoint();
 
             var order = context.Orders.Where(item => item.ID == point.ID).FirstOrDefault();
             order.OrderStatus = context.OrderStatuses.Where(item => item.ID == (int)Constant.OrderStatusesEnum.Created).FirstOrDefault();
@@ -166,6 +170,29 @@ namespace VRPWindowsForms
             if (pointsDropDown.Items.Count == 0)
             {
                 pointsDropDown.Text = "Select order";
+            }
+        }
+        private void ReloadCurrentStorePoint()
+        {
+            currentStorePoints.Clear();
+
+            var storeDTO = (StoreDTO)comboBox1.SelectedItem;
+
+            if(storeDTO == null)
+            {
+                if (stores.Count != 0)
+                {
+                    storeDTO = stores[0];
+                }
+                else
+                return;
+            }
+
+            BindingList<MapPoint> filtered = new BindingList<MapPoint>(points.Where(item => item.StoreID == storeDTO.ID).ToList());
+
+            foreach (var point in filtered)
+            {
+                currentStorePoints.Add(point);
             }
         }
         private void AddMarkerOnMap(double lat, double lng)
@@ -249,6 +276,26 @@ namespace VRPWindowsForms
 
                 dataGrid.RowHeadersVisible = false;
 
+                foreach (var order in route.Orders)
+                {
+                    var orderDB = context.Orders.Where(item => item.ID == order.ID).FirstOrDefault();
+
+                    if (orderDB != null)
+                    {
+                        orderDB.OrderStatus = context.OrderStatuses.Where(item => item.ID == (int)Constant.OrderStatusesEnum.Active).FirstOrDefault();
+                        order.OrderStatus = orderDB.OrderStatus.Status;
+                    }
+                }
+
+                var carDB = context.Cars.Where(item => item.ID == route.CarID).FirstOrDefault();
+
+                if (carDB != null)
+                {
+                    carDB.CarStatus = context.CarStatuses.Where(item => item.ID == (int)Constant.CarStatusesEnum.InDrive).FirstOrDefault();
+                }
+
+                context.SaveChanges();
+
                 dataGrid.DataSource = new BindingSource(route.Orders, null);
 
                 dataGrid.Columns["CustomerFullName"].HeaderText = "Customer";
@@ -260,9 +307,60 @@ namespace VRPWindowsForms
                 dataGrid.Columns["Store"].Visible = false;
                 dataGrid.Columns["Lattitude"].Visible = false;
                 dataGrid.Columns["Longitude"].Visible = false;
+
+                dataGrid.Columns.Add(new DataGridViewButtonColumn()
+                {
+                    HeaderText = "Action",
+                    Tag = (Action<OrderDTO>)FinishCurrentRoute,
+                    Text = "Finish",
+                    UseColumnTextForButtonValue = true
+                });
+                dataGrid.CellContentClick += CarRouteGrid_CellContentClick;
             }
 
             RedrawRoutes(cars[0].ID);
+        }
+        private void CarRouteGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+
+            if (e.RowIndex < 0)
+            {
+                //They clicked the header column, do nothing
+                return;
+            }
+
+            if (grid[e.ColumnIndex, e.RowIndex] is DataGridViewButtonCell)
+            {
+                var clickHandler = (Action<OrderDTO>)grid.Columns[e.ColumnIndex].Tag;
+                var point = (OrderDTO)grid.Rows[e.RowIndex].DataBoundItem;
+
+                clickHandler(point);
+            }
+        }
+        private void FinishCurrentRoute(OrderDTO point)
+        {
+            DialogResult result = MessageBox.Show("Are you shure tha order is finished?", "Alert", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                var orderDB = context.Orders.Where(item => item.ID == point.ID).FirstOrDefault();
+                if (orderDB != null)
+                {
+                    orderDB.OrderStatus = context.OrderStatuses.Where(item => item.ID == (int)Constant.OrderStatusesEnum.Closed).FirstOrDefault();
+                }
+                context.SaveChanges();
+
+                foreach (var route in routes)
+                {
+                    if (route.Orders.Contains(point))
+                    {
+                        TabPage page = (TabPage)waysTabControl.Controls["tabPage" + route.CarID];
+                        DataGridView dataGrid = (DataGridView)page.Controls["wayDataGrid" + route.CarID];
+
+                        dataGrid.Rows.RemoveAt(route.Orders.IndexOf(point));
+                    }
+                } 
+            }
         }
 
         private void LoadOrders()
@@ -301,7 +399,8 @@ namespace VRPWindowsForms
                         ID = order.ID,
                         StreetName = GetAddressService.ToShortAddressWithoutCity(order.DeliveryAddress),
                         Lat = order.DeliveryAddress.Lattitude,
-                        Lng = order.DeliveryAddress.Longitude
+                        Lng = order.DeliveryAddress.Longitude,
+                        StoreID = (int)order.StoreID
                     });
                 }
                 if (order.OrderStatus.ID == (int)Constant.OrderStatusesEnum.OnMap)
@@ -336,6 +435,7 @@ namespace VRPWindowsForms
             {
                 column.Width = ordersDataGrid.Width / ordersDataGrid.Columns.Count;
             }
+            ReloadCurrentStorePoint();
         }
 
         private void LoadCars()
@@ -481,6 +581,7 @@ namespace VRPWindowsForms
                 carsDropDown.DataSource = new BindingSource(bindingCars, null);
                 carsDropDown.DisplayMember = "Name";
             }
+            ReloadCurrentStorePoint();
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -542,6 +643,7 @@ namespace VRPWindowsForms
             customerNameFiltertxt.Text = null;
             fromDateFiltertxt.ResetText();
             toDateFiltertxt.ResetText();
+            dateCheckbox.Checked = false;
 
             FilterOutOrders();
         }
@@ -568,7 +670,10 @@ namespace VRPWindowsForms
                 filtered = filtered.Where(item => item.CustomerFullName.ToLower().Contains(customerNameFiltertxt.Text.ToLower().Trim().ToString())).ToList();
             }
 
-            filtered = filtered.Where(item => (item.CreatedDate >= fromDateFiltertxt.Value && item.CreatedDate <= toDateFiltertxt.Value)).ToList();
+            if (dateCheckbox.Checked)
+            {
+                filtered = filtered.Where(item => (item.CreatedDate >= fromDateFiltertxt.Value && item.CreatedDate <= toDateFiltertxt.Value)).ToList(); 
+            }
 
             orders = new BindingList<OrderDTO>(filtered);
 

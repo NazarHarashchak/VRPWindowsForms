@@ -15,5 +15,6 @@ namespace VRPWindowsForms.DTO
         public double Lng { get; set; }
         public int CarID { get; set; }
         public string CarName { get; set; }
+        public int StoreID { get; set; }
     }
 }

@@ -67,6 +67,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
             this.phoneNumberFiltertxt = new System.Windows.Forms.TextBox();
@@ -81,7 +82,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.dateCheckbox = new System.Windows.Forms.CheckBox();
             this.Routes.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -171,6 +172,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.dateCheckbox);
             this.groupBox6.Controls.Add(this.label6);
             this.groupBox6.Controls.Add(this.customerNameFiltertxt);
             this.groupBox6.Controls.Add(this.label5);
@@ -550,6 +552,16 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Add new customer";
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(207, 47);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(121, 36);
+            this.button5.TabIndex = 0;
+            this.button5.Text = "Add";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.label10);
@@ -682,15 +694,16 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button5
+            // dateCheckbox
             // 
-            this.button5.Location = new System.Drawing.Point(207, 47);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(121, 36);
-            this.button5.TabIndex = 0;
-            this.button5.Text = "Add";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.dateCheckbox.AutoSize = true;
+            this.dateCheckbox.Location = new System.Drawing.Point(101, 93);
+            this.dateCheckbox.Name = "dateCheckbox";
+            this.dateCheckbox.Size = new System.Drawing.Size(86, 17);
+            this.dateCheckbox.TabIndex = 11;
+            this.dateCheckbox.Text = "Filter by date";
+            this.dateCheckbox.UseVisualStyleBackColor = true;
+            this.dateCheckbox.CheckedChanged += new System.EventHandler(this.storeFilterBox_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -702,7 +715,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "VRP";
             this.Routes.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
@@ -793,6 +806,7 @@
         private System.Windows.Forms.TextBox secondNameFiltertxt;
         private System.Windows.Forms.TextBox nameFiltertxt;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.CheckBox dateCheckbox;
     }
 }
 

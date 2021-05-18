@@ -124,6 +124,7 @@ namespace VRPWindowsForms
                         Status = "Inactive"
                     }
                 });
+                context.SaveChanges();
             }
         }
     }
