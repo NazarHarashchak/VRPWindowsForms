@@ -358,6 +358,13 @@ namespace VRPWindowsForms
                         DataGridView dataGrid = (DataGridView)page.Controls["wayDataGrid" + route.CarID];
 
                         dataGrid.Rows.RemoveAt(route.Orders.IndexOf(point));
+                        if(dataGrid.Rows.Count == 0)
+                        {
+                            var carDB = context.Cars.Where(item => item.ID == route.CarID).FirstOrDefault();
+                            carDB.CarStatus = context.CarStatuses.Where(item => item.ID == (int)Constant.CarStatusesEnum.InStore).FirstOrDefault();
+
+                            context.SaveChanges();
+                        }
                     }
                 } 
             }

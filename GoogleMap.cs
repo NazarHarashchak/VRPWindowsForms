@@ -14,7 +14,7 @@ namespace VRPWindowsForms
 {
     class GoogleMap
     {
-        private readonly string API_KEY = "PUT_YOUR_KEY_HERE";
+        private readonly string API_KEY = "AIzaSyBAYXQlJbw-pkM6X0wacvJqDqUIukxio24";
         private readonly string format = "json";
         public GoogleMap() { }
         public GoogleMap(string format)
@@ -38,11 +38,6 @@ namespace VRPWindowsForms
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(path);
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
                 content = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                //string pathFile = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\exampleRoute.json";
-                //using (StreamReader reader = new StreamReader(pathFile, Encoding.Default))
-                //{
-                //    content = reader.ReadToEnd();
-                //}
             }
             catch (Exception ex)
             {
